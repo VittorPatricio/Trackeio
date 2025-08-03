@@ -10,7 +10,8 @@ import colors from '../../../colors';
 import {SideBar} from '../components/SideBar';
 import {SideBarItem} from '../components/SideBarItem';
 import {AreaTop} from '../components/AreaTop';
-import { FinanceCard } from '../components/FinanceCard';
+import StartTab from '../tabs/start_tab/StartTab';
+import GoalTab from '../tabs/goal_tab/GoalTab';
 
 export const HomeScreen = () => {
   const [search, setSearch] = useState('');
@@ -83,6 +84,7 @@ export const HomeScreen = () => {
             setIsFocus={setIsFocus}
             sideBarOpen={sideBarOpen}
             setSideBarOpen={setSideBarOpen}
+            title={selectedScreen}
           /> 
 
           <ScrollView 
@@ -91,81 +93,8 @@ export const HomeScreen = () => {
             scrollEnabled={true}
             contentContainerStyle={styles.scrollContent}
           >
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
+           {/* <StartTab cards={cards}/> */}
+           <GoalTab/>
           </ScrollView>
         </View>
       </View>
@@ -197,12 +126,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 20,
-  },
-  cardsRow: {
-    flexDirection: 'row',
-    marginBottom: 24,
-    paddingHorizontal: 20,
-    justifyContent: 'center',
   },
   mainContainerHorizontal: {
     flex: 1,

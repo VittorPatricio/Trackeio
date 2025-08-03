@@ -10,6 +10,7 @@ interface AreaTopProps {
   setIsFocus: (focus: boolean) => void;
   sideBarOpen: boolean;
   setSideBarOpen: (open: boolean) => void;
+  title: string;
 }
 
 export const AreaTop = ({
@@ -19,6 +20,7 @@ export const AreaTop = ({
   setIsFocus,
   sideBarOpen,
   setSideBarOpen,
+  title
 }: AreaTopProps) => {
   return (
     <View
@@ -33,7 +35,7 @@ export const AreaTop = ({
           style={styles.areaTopIcon}
         />
        </TouchableOpacity>
-        <Text style={styles.areaTopTitle}>Dashboard</Text>
+        <Text style={styles.areaTopTitle}>{title}</Text>
       </View>
       <View style={styles.right}>
         <View style={[styles.searchContainer, {
@@ -88,9 +90,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   areaTopIcon: {
-    width: 50,
-    height: 50,
+    width: 55,
+    height: 55,
     marginTop: 5,
+    padding: 20,
   },
   left: {
     width: '40%',

@@ -36,6 +36,11 @@ Trackeio/
 
 ## Como Executar
 
+### NPM
+```bash
+npm start -- --reset-cache
+```
+
 ### Windows
 ```bash
 npm run windows
