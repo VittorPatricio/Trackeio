@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image, View, TouchableOpacity, FlatList } from 'react-native';
+import { data } from '../../../images';
 
 const SPACING = 12;
 
-const data = [
-  { id: '1', image: require('../../assets/images/image-16.png') },
-  { id: '2', image: require('../../assets/images/image-17.png') },
-  { id: '3', image: require('../../assets/images/image-18.png') },
-  { id: '4', image: require('../../assets/images/image-19.png') },
-];
 
-const Carousel = () => {
+
+interface CarouselProps {
+  onSelectAvatar: (avatar: string) => void;
+}
+
+
+const Carousel = ({
+  onSelectAvatar
+}: CarouselProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
@@ -24,7 +27,10 @@ const Carousel = () => {
           return (
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => setSelectedIndex(index)}
+              onPress={() => {
+                setSelectedIndex(index);
+                onSelectAvatar(item.image);
+              }}
               style={[styles.item, isSelected && styles.itemSelected]}
             >
               <Image source={item.image} style={styles.image} resizeMode="contain" />

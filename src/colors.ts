@@ -1,7 +1,7 @@
 export const colors = {
   // Cores principais
   primary: '#4A90E2',      // Azul suave (botões, links)
-  secondary: '#50E3C2',    // Verde-água (ações positivas)
+  secondary: '#6AADFD',    // Azul-claro
   error: '#FF6B6B',        // Vermelho claro (erros/gastos)
   
   // Cores de texto
@@ -14,6 +14,9 @@ export const colors = {
   
   // Cores neutras
   neutral: '#A0A0A0',      // Ícones, separadores, detalhes
+
+  // Cor da sidebar
+  sideBar: "#4A90E2" //background
 };
 
 export default colors; 

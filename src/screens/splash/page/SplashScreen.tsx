@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,15 +6,26 @@ import {
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
-import colors from '../colors';
+import colors from '../../../colors';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SplashScreen: React.FC = () => {
+const SplashScreen = () => {
   const navigation = useNavigation();
-  setTimeout(() => {
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      AsyncStorage.getItem('user').then((user) => {
+        if (user) {
+          navigation.navigate('Home');
+        } else {
+          navigation.navigate('Login');
+        }
+      });
+    }, 1000);
     
-    navigation.navigate('Login')
-  }, 1000);
+  }, []);
   
   return (
     <View style={styles.container}>

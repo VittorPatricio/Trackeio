@@ -1,21 +1,45 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import colors from '../colors';
+import colors from '../../../colors';
 import Carousel from '../components/Carousel';
+import {User, AuthContext} from '../../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
+  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
-  const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const { setUser} = useContext(AuthContext);
+  const handleLogin = ({ name, avatar }: User) => {
+    if (!name.trim()) {
+      Alert.alert('Atenção', 'Por favor, digite seu nome.');
+      return;
+    }
+    if (!avatar) {
+      Alert.alert('Atenção', 'Por favor, selecione um avatar.');
+      return;
+    }
+
+    setUser({ name, avatar });
+    AsyncStorage.setItem('user', JSON.stringify({ name, avatar }));
+    setTimeout(() => {
+      navigation.navigate('Home');
+    }, 500);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Selecione um Avatar!</Text>
-      <Carousel />
+      <Carousel onSelectAvatar={setUserAvatar} />
       <Text style={styles.title}>Que bom te ver por aqui!</Text>
       <Text style={styles.subtitle}>Como podemos te chamar?</Text>
       <View style={styles.inputContainer}>
@@ -23,21 +47,27 @@ const LoginScreen: React.FC = () => {
           placeholder="Digite seu nome"
           placeholderTextColor={colors.neutral}
           keyboardType="default"
-          style={[styles.textInput, { 
-            borderWidth: isFocused ? 3 : 2,}]}
-          value={name}
-          onChangeText={setName}
+          style={[
+            styles.textInput,
+            {
+              borderWidth: isFocused ? 3 : 2,
+            },
+          ]}
+          value={userName}
+          onChangeText={setUserName}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
         <View style={styles.buttonArea}>
-          <TouchableOpacity onPress={()=>{
-            console.log('quero me matar')
-          }} style={styles.button} >
-            <Text style={styles.buttonText}>Começar Planejamento Financeiro!</Text>
+          <TouchableOpacity
+            onPress={() => handleLogin({name: userName, avatar: userAvatar})}
+            style={styles.button}>
+            <Text style={styles.buttonText}>
+              Começar Planejamento Financeiro!
+            </Text>
           </TouchableOpacity>
         </View>
-        </View>
+      </View>
     </View>
   );
 };
@@ -48,13 +78,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingVertical: 25
+    paddingVertical: 25,
   },
-  iconArea:{
+  iconArea: {
     height: 35,
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -79,9 +109,9 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontSize: 16,
     paddingHorizontal: 16,
-    paddingTop: 10
+    paddingTop: 10,
   },
-  buttonArea:{
+  buttonArea: {
     height: 80,
     width: '100%',
     justifyContent: 'center',
@@ -101,8 +131,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.textLight,
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 16,
   },
 });
 
-export default LoginScreen; 
+export default LoginScreen;
