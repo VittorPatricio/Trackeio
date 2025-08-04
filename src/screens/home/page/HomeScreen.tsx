@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -12,22 +12,30 @@ import {SideBarItem} from '../components/SideBarItem';
 import {AreaTop} from '../components/AreaTop';
 import StartTab from '../tabs/start_tab/StartTab';
 import GoalTab from '../tabs/goal_tab/GoalTab';
+import SettingsItem from '../components/SettingsItem';
+import Settings from '../components/Settings';
+import useLogout from '../../../hooks/useLogout';
+import { AuthContext } from "../../../context/AuthContext";
+
 
 export const HomeScreen = () => {
   const [search, setSearch] = useState('');
   const [isFocus, setIsFocus] = useState(false);
+  const [settings, setSettings] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(true);
-  const [selectedScreen, setSelectedScreen] = useState('Inicio');
+  const [selectedScreen, setSelectedScreen] = useState('Dashboard');
+  const {logout} = useLogout();
+  const {user} = useContext(AuthContext);
 
   const data = [
     {
       id: 1,
-      title: 'Inicio',
+      title: 'Dashboard',
       icon: require('../../../../assets/icons/icon1.png'),
     },
     {
       id: 2,
-      title: 'Metas',
+      title: 'Minhas Metas',
       icon: require('../../../../assets/icons/icon2.png'),
     },
     {id: 3, title: 'Sair', icon: require('../../../../assets/icons/icon3.png')},
@@ -54,11 +62,22 @@ export const HomeScreen = () => {
     },
   ];
 
+  const showScreen = (screen: string) => {
+    switch(screen){
+      case 'Dashboard':
+        return <StartTab cards={cards}/>
+      case 'Minhas Metas':
+        return <GoalTab/>
+      default:
+        return <StartTab cards={cards}/>
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainLayout}>
-        {sideBarOpen && (
-          <SideBar>
+        {sideBarOpen && user && (
+          <SideBar user={user}>
             <FlatList
               data={data}
               showsVerticalScrollIndicator={true}
@@ -85,7 +104,15 @@ export const HomeScreen = () => {
             sideBarOpen={sideBarOpen}
             setSideBarOpen={setSideBarOpen}
             title={selectedScreen}
+            settings={settings}
+            setSettings={setSettings}
           /> 
+          
+          {settings && (
+            <Settings>
+            <SettingsItem icon={require('../../../../assets/icons/icon3.png')} title="Sair" onPress={logout} />
+          </Settings>
+          )}
 
           <ScrollView 
             style={styles.scrollView}
@@ -93,8 +120,7 @@ export const HomeScreen = () => {
             scrollEnabled={true}
             contentContainerStyle={styles.scrollContent}
           >
-           {/* <StartTab cards={cards}/> */}
-           <GoalTab/>
+           {showScreen(selectedScreen)}
           </ScrollView>
         </View>
       </View>

@@ -1,14 +1,16 @@
 import React, { ReactNode, useContext } from "react"
 import { Image, StyleSheet, View, Text, ScrollView } from "react-native"
 import colors from "../../../colors";
-import { AuthContext } from "../../../context/AuthContext";
-
 interface SideBarProps {
-    children: ReactNode
+    children: ReactNode;
+    user: any;
 }
 
-export const SideBar = ({children}: SideBarProps) =>{
-    const {user} = useContext(AuthContext);
+export const SideBar = ({children, user}: SideBarProps) =>{
+
+    if (!user) {
+        return null;
+    }
 
     return (
         <View style={styles.sideContainer}>

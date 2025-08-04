@@ -3,6 +3,7 @@ export const colors = {
   primary: '#4A90E2',      // Azul suave (botões, links)
   secondary: '#6AADFD',    // Azul-claro
   error: '#FF6B6B',        // Vermelho claro (erros/gastos)
+  white: "#f2f2f2",
   
   // Cores de texto
   textDark: '#1C1C1E',     // Quase preto (modo claro)

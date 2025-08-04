@@ -13,18 +13,15 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User>({
-    avatar: "",
-    name: "",
-  });
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    AsyncStorage.getItem('user').then((user) => {
-      if (user) {
-        setUser(JSON.parse(user));
+    AsyncStorage.getItem('user').then((userData) => {
+      if (userData) {
+        setUser(JSON.parse(userData));
       }
     });
-  }, [user]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

@@ -10,6 +10,8 @@ interface AreaTopProps {
   setIsFocus: (focus: boolean) => void;
   sideBarOpen: boolean;
   setSideBarOpen: (open: boolean) => void;
+  settings: boolean;
+  setSettings: (settings: boolean) => void;
   title: string;
 }
 
@@ -20,6 +22,8 @@ export const AreaTop = ({
   setIsFocus,
   sideBarOpen,
   setSideBarOpen,
+  settings,
+  setSettings,
   title
 }: AreaTopProps) => {
   return (
@@ -42,7 +46,7 @@ export const AreaTop = ({
             borderWidth: isFocus ? 2 : 3
         }]}>
           <TextInput
-            placeholder="Digite seu nome"
+            placeholder="O que você deseja?"
             placeholderTextColor={colors.textLight}
             keyboardType="default"
             style={
@@ -63,7 +67,7 @@ export const AreaTop = ({
             Alert.alert("notificação");
         }} icon={require('../../../../assets/icons/notification.png')} />
         <Icon  onPress={()=>{
-            Alert.alert("setting");
+            setSettings(!settings);
         }}  icon={require('../../../../assets/icons/setting.png')} />
       </View>
     </View>

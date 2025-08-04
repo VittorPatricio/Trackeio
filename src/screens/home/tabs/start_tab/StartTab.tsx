@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { FinanceCard } from "../../components/FinanceCard";
 import { Card } from "../../../../types/types";
 
@@ -9,8 +9,6 @@ interface StartTabProps {
 }
 
 const StartTab = ({cards}: StartTabProps) => {
-
-
 
     return (
         <View>
@@ -21,72 +19,12 @@ const StartTab = ({cards}: StartTabProps) => {
             </View>
             <View style={styles.cardsRow}>
               {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
+                <FinanceCard key={idx + 3} {...card} />
               ))}
             </View>
             <View style={styles.cardsRow}>
               {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
-              ))}
-            </View>
-            <View style={styles.cardsRow}>
-              {cards.map((card, idx) => (
-                <FinanceCard key={idx} {...card} />
+                <FinanceCard key={idx + 6} {...card} />
               ))}
             </View>
         </View>
